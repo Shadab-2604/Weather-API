@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        #weather-result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <input type="text" id="city-input" placeholder="Enter city name">
+    <button onclick="getWeather()">Get Weather</button>
+    <div id="weather-result"></div>
+
+    <script>
+        async function getWeather() {
+            const cityInput = document.getElementById('city-input');
+            const resultDiv = document.getElementById('weather-result');
+
+            const location = cityInput.value;
+
+            if (!location) {
+                resultDiv.innerHTML = 'Please enter a city name';
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/weather/${location}`);
+                const data = await response.json();
+
+                // Today's first day data
+                const today = data.days[0];
+
+                resultDiv.innerHTML = `
+                    <h2>${data.resolvedAddress}</h2>
+                    <p><strong>Description:</strong> ${data.description}</p>
+                    <p><strong>Temperature:</strong> ${today.temp}°C</p>
+                    <p><strong>Max/Min:</strong> ${today.tempmax}°C / ${today.tempmin}°C</p>
+                    <p><strong>Humidity:</strong> ${today.humidity}%</p>
+                    <p><strong>Wind Speed:</strong> ${today.windspeed} km/h</p>
+                    <p><strong>Conditions:</strong> ${today.conditions}</p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = 'Error fetching weather data';
+                console.error('Fetch error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
