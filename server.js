@@ -6,14 +6,9 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+// server.js
 const cors = require('cors');
 app.use(cors());
-
-// Root route - Welcome message
-app.get('/', (req, res) => {
-  res.send('🌤️ Welcome to the Weather API! Use /api/weather/{location} to get weather data.');
-});
 
 app.get('/api/weather/:location', async (req, res) => {
   const location = req.params.location;
