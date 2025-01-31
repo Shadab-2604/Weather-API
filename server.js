@@ -10,6 +10,11 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 app.use(cors());
 
+// Root route to show a welcome message
+app.get('/', (req, res) => {
+  res.send('Welcome to the Weather API! Use /api/weather/{city} to get weather data.');
+});
+
 app.get('/api/weather/:location', async (req, res) => {
   const location = req.params.location;
   console.log(`Received weather request for: ${location}`);
