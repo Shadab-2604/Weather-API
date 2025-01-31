@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/weather/(.*)",
+        "dest": "/server.js"
+      }
+    ],
+    "env": {
+      "WEATHER_API_KEY": "@weather_api_key",
+      "MONGO_URI": "@mongo_uri",
+      "PORT": "3000"
+    }
+  }
+  
