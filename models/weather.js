@@ -3,7 +3,7 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const WEATHER_API_KEY = '5Y8ZRHM75D36ZFAPS6P5U8X2V';
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
 const testAPI = async () => {
   const testUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/thane?unitGroup=us&key=${WEATHER_API_KEY}&contentType=json`;
