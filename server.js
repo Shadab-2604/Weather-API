@@ -10,6 +10,10 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the Weather API! Use /api/weather/:location to get weather information.' });
+});
+
 app.get('/api/weather/:location', async (req, res) => {
   const location = req.params.location;
   console.log(`Received weather request for: ${location}`);
